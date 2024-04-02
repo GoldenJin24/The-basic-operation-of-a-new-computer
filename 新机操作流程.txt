@@ -1,0 +1,7 @@
+1.美化图标,设置任务栏
+2.网卡驱动和常见驱动
+3.常用软件：edge，easyconnect，clash，7zip，火绒，vscode，(qq,weixin,tengxunhuiyi)，
+                  wps，traffic monitor，百度网盘，ddl，常用库，TranslucentTB ，typora，idm
+   科研相关的语言和ide：miniconda，zotero，python3.9.6（本地）（pip更新 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple，pip config set install.trusted-host pypi.douban.com）
+                                     ，vscode（插件），R（4.3.3）和Rstudio
+  win10激活，（irm https://massgrave.dev/get | iex）停止更新

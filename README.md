@@ -151,3 +151,33 @@ MD5:0B4B736177739F3DA75F0A3E53F24D08
     ![alt text](image-1.png)
     再点击find，找到conda创建的新环境的python文件路径就可以了（同上，例如D:\softwares\miniconda\envs\pytorch_env\python.exe)
     
+- python有一些包需要C++等依赖
+```
+#例如安装ushuffle包报错
+Looking in indexes: https://pypi.tuna.tsinghua.edu.cn/simple
+Collecting ushuffle
+  Using cached https://pypi.tuna.tsinghua.edu.cn/packages/a2/4c/96ca5e83e53e834e82bdb0d1e325e4fc1a165a08296e1d0fec6b32d3dbb0/ushuffle-1.1.2.tar.gz (35 kB)
+  Preparing metadata (setup.py) ... done
+Building wheels for collected packages: ushuffle
+  Building wheel for ushuffle (setup.py) ... error
+  error: subprocess-exited-with-error
+
+  × python setup.py bdist_wheel did not run successfully.
+  │ exit code: 1
+  ╰─> [6 lines of output]
+      No Cython installed. Building from pre-compiled sources.
+      running bdist_wheel
+      running build
+      running build_ext
+      building 'ushuffle' extension
+      error: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/
+      [end of output]
+
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+  ERROR: Failed building wheel for ushuffle
+  Running setup.py clean for ushuffle
+Failed to build ushuffle
+ERROR: Could not build wheels for ushuffle, which is required to install pyproject.toml-based projects
+```
+根据提供的网址安装依赖：https://visualstudio.microsoft.com/zh-hans/visual-cpp-build-tools/
+同理有一些软件需要安装__微软常用运行库合集__,用户可以自行搜索

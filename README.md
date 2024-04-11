@@ -129,16 +129,25 @@ MD5:0B4B736177739F3DA75F0A3E53F24D08
     print(torch.cuda.is_available())
     ```
 - VSCode安装jupyter拓展后，新建任意一个ipynb后缀的文件，右上角切换kernel，切换到其他配置好的conda虚拟环境。（例如pytorch_env)
-   需要在VScode设置中添加python解释器，具体的路径就是miniconda的安装路径-》envs-》pytorch_env -》 python.exe
-   例如这样：D:\softwares\miniconda\envs\pytorch_env
+   - 需要在VScode设置中添加python解释器，具体的路径就是miniconda的安装路径-》envs-》pytorch_env -》 python.exe
+   例如这样：D:\softwares\miniconda\envs\pytorch_env\python.exe
    添加后会问是否需要安装ipykernel，点击同意即可。
    或者手动安装：
     
     ```jsx
+    #在base环境下安装
     conda install nb_conda
-    conda activate cvml
+    conda install nb_conda_kernels
+    #转到目标环境,需要activate
     conda install ipykernel
     
-    #就是新建立的环境需要pip 和ipykernel
+    #一步命令：就是新建立的环境需要pip 和ipykernel
     conda install -p d:\softwares\miniconda\envs\pytorch_env ipykernel --update-deps --force-reinstall
     ```
+  - 如果第一种方法安装报错的话，推荐在vscode里面直接点，首先ctrl+p打开搜索框，输入> python 后选择python interpreter
+    如下
+    ![alt text](image.png)
+    然后
+    ![alt text](image-1.png)
+    再点击find，找到conda创建的新环境的python文件路径就可以了（同上，例如D:\softwares\miniconda\envs\pytorch_env\python.exe)
+    

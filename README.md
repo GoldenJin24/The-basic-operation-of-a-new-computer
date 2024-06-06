@@ -181,3 +181,10 @@ ERROR: Could not build wheels for ushuffle, which is required to install pyproje
 ```
 根据提供的网址安装依赖：https://visualstudio.microsoft.com/zh-hans/visual-cpp-build-tools/
 同理有一些软件需要安装__微软常用运行库合集__,用户可以自行搜索
+
+- DirectX_repair
+重装电脑后可能会有一下dll文件确实，可以试试这个软件修复一下
+https://s-83.lanzog.com/06062300146355948bb/2023/11/07/2e8b725991c6949ebdafc5275e5fe37e.7z?st=uvUdKC6G-dC98wad1iJVGQ&e=1717689335&b=U0UKYwByVjZTZVd1VV0FXgUCCTBXJgZhU2kKdV1yBENWag5mAGEHbFZgAjEKPlcMCRkAOAJqBHYBOwxuAWhTeFMvCj0Aeg_c_c&fi=146355948&pid=111-42-148-147&up=2&mp=0&co=0
+或者
+https://pan.baidu.com/s/1nJAFP2ieDoF4EEBG7JVeFw?pwd=3tui 
+提取码:3tui

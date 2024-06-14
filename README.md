@@ -150,41 +150,46 @@ MD5:0B4B736177739F3DA75F0A3E53F24D08
     然后
     ![alt text](image-1.png)
     再点击find，找到conda创建的新环境的python文件路径就可以了（同上，例如D:\softwares\miniconda\envs\pytorch_env\python.exe)
-    
-- python有一些包需要C++等依赖
-```
-#例如安装ushuffle包报错
-Looking in indexes: https://pypi.tuna.tsinghua.edu.cn/simple
-Collecting ushuffle
-  Using cached https://pypi.tuna.tsinghua.edu.cn/packages/a2/4c/96ca5e83e53e834e82bdb0d1e325e4fc1a165a08296e1d0fec6b32d3dbb0/ushuffle-1.1.2.tar.gz (35 kB)
-  Preparing metadata (setup.py) ... done
-Building wheels for collected packages: ushuffle
-  Building wheel for ushuffle (setup.py) ... error
-  error: subprocess-exited-with-error
 
-  × python setup.py bdist_wheel did not run successfully.
-  │ exit code: 1
-  ╰─> [6 lines of output]
-      No Cython installed. Building from pre-compiled sources.
-      running bdist_wheel
-      running build
-      running build_ext
-      building 'ushuffle' extension
-      error: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/
-      [end of output]
+- dll运行库等依赖，可以用三个文件修复，这里打包压缩好了（分为3卷方便github上传）。traffic monitor或者游戏（例如尘白禁区）运行不了都可以试试修复。
+  - python有一些包需要C++等依赖
+  ```
+  #例如安装ushuffle包报错
+  Looking in indexes: https://pypi.tuna.tsinghua.edu.cn/simple
+  Collecting ushuffle
+    Using cached https://pypi.tuna.tsinghua.edu.cn/packages/a2/4c/96ca5e83e53e834e82bdb0d1e325e4fc1a165a08296e1d0fec6b32d3dbb0/ushuffle-1.1.2.tar.gz (35 kB)
+    Preparing metadata (setup.py) ... done
+  Building wheels for collected packages: ushuffle
+    Building wheel for ushuffle (setup.py) ... error
+    error: subprocess-exited-with-error
 
-  note: This error originates from a subprocess, and is likely not a problem with pip.
-  ERROR: Failed building wheel for ushuffle
-  Running setup.py clean for ushuffle
-Failed to build ushuffle
-ERROR: Could not build wheels for ushuffle, which is required to install pyproject.toml-based projects
-```
-根据提供的网址安装依赖：https://visualstudio.microsoft.com/zh-hans/visual-cpp-build-tools/
-同理有一些软件需要安装__微软常用运行库合集__,用户可以自行搜索
+    × python setup.py bdist_wheel did not run successfully.
+    │ exit code: 1
+    ╰─> [6 lines of output]
+        No Cython installed. Building from pre-compiled sources.
+        running bdist_wheel
+        running build
+        running build_ext
+        building 'ushuffle' extension
+        error: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/
+        [end of output]
 
-- DirectX_repair
-重装电脑后可能会有一下dll文件确实，可以试试这个软件修复一下
-https://s-83.lanzog.com/06062300146355948bb/2023/11/07/2e8b725991c6949ebdafc5275e5fe37e.7z?st=uvUdKC6G-dC98wad1iJVGQ&e=1717689335&b=U0UKYwByVjZTZVd1VV0FXgUCCTBXJgZhU2kKdV1yBENWag5mAGEHbFZgAjEKPlcMCRkAOAJqBHYBOwxuAWhTeFMvCj0Aeg_c_c&fi=146355948&pid=111-42-148-147&up=2&mp=0&co=0
-或者
-https://pan.baidu.com/s/1nJAFP2ieDoF4EEBG7JVeFw?pwd=3tui 
-提取码:3tui
+    note: This error originates from a subprocess, and is likely not a problem with pip.
+    ERROR: Failed building wheel for ushuffle
+    Running setup.py clean for ushuffle
+  Failed to build ushuffle
+  ERROR: Could not build wheels for ushuffle, which is required to install pyproject.toml-based projects
+  ```
+  根据提供的网址安装依赖：https://visualstudio.microsoft.com/zh-hans/visual-cpp-build-tools/
+  同理有一些软件需要安装__微软常用运行库合集__,用户可以自行搜索
+
+  - DirectX_repair
+  重装电脑后可能会有一下dll文件确实，可以试试这个软件修复一下
+  https://s-83.lanzog.com/06062300146355948bb/2023/11/07/2e8b725991c6949ebdafc5275e5fe37e.7z?st=uvUdKC6G-dC98wad1iJVGQ&e=1717689335&b=U0UKYwByVjZTZVd1VV0FXgUCCTBXJgZhU2kKdV1yBENWag5mAGEHbFZgAjEKPlcMCRkAOAJqBHYBOwxuAWhTeFMvCj0Aeg_c_c&fi=146355948&pid=111-42-148-147&up=2&mp=0&co=0
+  或者
+  https://pan.baidu.com/s/1nJAFP2ieDoF4EEBG7JVeFw?pwd=3tui 
+  提取码:3tui
+
+  - 另一个运行库修复软件
+  https://zhangyue667.lanzouh.com/DirectXRepairEnhanced
+

@@ -1,13 +1,24 @@
 # win新电脑安装指南
 ## 本博客主要用于windows笔记本到手后，重装后的一些配置，软件推荐。
+- 验机简易指南
+  - 1.取到快递时查看包装袋是否破碎，是否进水有水渍。全程开箱录视频。
+  - 2.拿出电脑，观察外观，机器刚性，外壳螺丝等是否有痕迹。把笔记本放在桌子上看是否变形，脚垫阻尼怎么样。
+  - 3.是否有运输模式即第一次不插电无法开机。
+  - 4.**不要联网激活**，因为联网激活会导致无法7天无理由退货！win11可以 shift+f10 在命令行中输入oobe\bypassnro （需要鼠标点一下里面）就可以重启不联网打开。
+  - 5.开机后用u盘拷贝一个图吧工具箱，查看cpu等硬件是否一样，硬盘通电时间，屏幕坏点测试，内存测试，键盘测试（插电下单烤和双烤）等。
+  - 6.测试一下usb接口，typec接口，hdmi接口等是否可以正常使用。
+  - 7.在官网下安装驱动保持最佳性能。
+  - 8.amd cpu的电脑可以把睡眠选项改一改（因为amd很容易盖盖子后睡死导致不得不重启）。（差点错怪鸡哥14x）
 - 桌面右键个性化-》主题-》桌面图标设置，挑出我的电脑图标。
   - 右键我的电脑-》磁盘管理，可以看到不同硬盘，可以自己分区或者扩容。（推荐重装的时候用DiskGenius分好磁盘再安装）
-  - 磁盘分区C盘200g左右（有一些软件默认存储在C盘，例如conda创建的环境，并不是很好修改安装路径。）。win10最开始一般占30-50g不等，后期更会是不是更新，变得臃肿。
+  - 磁盘分区C盘200-300g左右
+  （有一些软件默认存储在C盘，例如conda创建的环境，并不是很好修改安装路径。例如conda下载包的缓存，hugging face下载的模型的缓存~win+R键再输入%temp%可以看到缓存文件，可以删除一些）。
+  **win10最开始一般占30-50g不等**，后期会是不是更新，变得臃肿。
   - 软件，数据集，浏览器，迅雷，idm等下载路径，按要求分盘和对应大小。
 
 - 网卡驱动和常见驱动，可以根据笔记本型号或者网卡型号在对应的官网下载。（如果是重装或者更换网卡，强烈建议在U盘中备份网卡驱动，实在不行可以用usb线连接电脑和手机进行网络共享。）
 
-- 常用软件：edge，7zip，火绒，(qq,微信,腾讯会议)，wps，traffic monitor（电脑硬件监控器），百度网盘，ddl常用库（一些小众软件需要依赖各种ddl，win版本过低或者重装后容易缺失），TranslucentTB（透明任务栏） ，typora（markdown编辑器），idm（多线程下载），notion（笔记类软件），potplayer（视频播放器，支持很多编码格式），amd驱动或者nvidia驱动（深度学习CUDA等❌ 保证游戏性能✔）
+- 常用软件：edge，office tool plus，everything，7zip，火绒，(qq,微信,腾讯会议)，wps，traffic monitor（电脑硬件监控器），百度网盘，ddl常用库（一些小众软件需要依赖各种ddl，win版本过低或者重装后容易缺失），TranslucentTB（透明任务栏） ，typora（markdown编辑器），idm（多线程下载），notion（笔记类软件），potplayer（视频播放器，支持很多编码格式），amd驱动或者nvidia驱动（深度学习CUDA等❌ 保证游戏性能✔）
 - 科研相关的语言和ide：python，R，vscode（自己喜欢的IDE即可），Rstudio，miniconda，endnote，zotero，easyconnect，V*N（上网专用）
 - 如果是win10，可能需要的工具
   - win10镜像和PE
@@ -43,7 +54,7 @@ MD5:0B4B736177739F3DA75F0A3E53F24D08
         4.双击，修改基数为十进制，修改数值数据是“暂停更新的天数”，建议改为5000等。
         5.按住键盘上win+i，找到激活，高级设置修改暂停时间。
         6.重启
-## 关于python，R的一些换源，pytorch环境设置等
+## 关于python，R的一些换源，pytorch，transformers环境设置等
 - 下载python，明确自己base本地安装的版本，例如python3.9.6（本地）
     ```
     #查看当前环境pip的配置，新下载的一般就是空的
@@ -128,6 +139,53 @@ MD5:0B4B736177739F3DA75F0A3E53F24D08
     print(torch.version.cuda)
     print(torch.cuda.is_available())
     ```
+- hugging face的transformers 安装
+  参考https://www.bilibili.com/video/BV1ma4y1g791/?spm_id_from=333.1365.top_right_bar_window_default_collection.content.click    
+  大佬的个人主页https://github.com/zyds
+  - 第一步conda创建环境和安装
+  ```
+  conda create -n torch_hugging  python=3.9 -y
+  conda activate torch_hugging
+  #可以根据gpu版本自己去pytorch官网上找对应下载命令，以下是老版本cpu的
+  pip install torch==1.13.1+cpu torchvision==0.14.1+cpu torchaudio==0.13.1 --extra-index-url https://download.pytorch.org/whl/cpu
+  pip install transformers datasets evaluate peft accelerate gradio optimum sentencepiece
+  pip install jupyterlab scikit-learn pandas matplotlib tensorboard nltk rouge
+  ```
+  - 如果第一步报错，始终下载不好，可以试试用requirement文件匹配着下载
+  ```
+  #conda下生成requirement （我直接给出来了）
+  #conda list --export > D:\requirements.txt
+  #记得激活你的环境  requirements的路径得是你的电脑下的路径
+  conda install --file requirements.txt
+
+  #原始的pip下的生成requirement （我直接给出来了）
+  pip freeze > requirements.txt
+  #记得激活你的环境  requirements的路径得是你的电脑下的路径 -i是指定源，防止你之前没设置
+  pip install -r requirements.txt -i https://pypi.douban.com/simple
+  ```
+  - 第二步修改hosts文件
+  用everything软件搜索hosts文件，需要的是路径为C:\Windows\System32\drivers\etc的，在后面添加以下内容
+  ```
+  185.199.108.133 raw.githubusercontent.com
+  185.199.109.133 raw.githubusercontent.com
+  185.199.110.133 raw.githubusercontent.com
+  185.199.111.133 raw.githubusercontent.com
+  2606:50c0:8000:154 raw.githubusercontent.com
+  2606:50c0:8001:154 raw.githubusercontent.com
+  2606:50c0:8002::154 raw.githubusercontent.com
+  2606:50c0:8003::154 raw.githubusercontent.com
+  ```
+  - 第三步测试一下（CPU的话很慢，只是看一下能不能打开）
+  ```
+  #导入gradio
+  import gradio as gr
+  #导入transformersi相关包
+  from transformers import *
+  #通过Interface加载oipeline并启动文本分类服务
+  gr.Interface.from_pipeline(pipeline("text-classification",model="uer/roberta-base-finetuned-dianping-chinese")).launch()
+
+  #默认下载的模型是在C:\Users\youname\.cache\huggingface\hub\models--uer--roberta-base-finetuned-dianping-chinese\snapshots\XXXXXX
+  ```
 - VSCode安装jupyter拓展后，新建任意一个ipynb后缀的文件，右上角切换kernel，切换到其他配置好的conda虚拟环境。（例如pytorch_env)
    - 需要在VScode设置中添加python解释器，具体的路径就是miniconda的安装路径-》envs-》pytorch_env -》 python.exe
    例如这样：D:\softwares\miniconda\envs\pytorch_env\python.exe
@@ -151,7 +209,17 @@ MD5:0B4B736177739F3DA75F0A3E53F24D08
     ![alt text](image-1.png)
     再点击find，找到conda创建的新环境的python文件路径就可以了（同上，例如D:\softwares\miniconda\envs\pytorch_env\python.exe)
 
-- dll运行库等依赖，可以用三个文件修复，这里打包压缩好了（分为3卷方便github上传）。traffic monitor或者游戏（例如尘白禁区）运行不了都可以试试修复。
+- dll运行库等依赖，可以用多个软件修复，这里打包压缩好了（分为3卷方便github上传）。traffic monitor或者游戏（例如尘白禁区）运行不了都可以试试修复。
+  - DirectX_repair（图吧工具箱里面也有，首先推荐这个比较方便）
+  重装电脑后可能会有一下dll文件确实，可以试试这个软件修复一下
+  https://s-83.lanzog.com/06062300146355948bb/2023/11/07/2e8b725991c6949ebdafc5275e5fe37e.7z?st=uvUdKC6G-dC98wad1iJVGQ&e=1717689335&b=U0UKYwByVjZTZVd1VV0FXgUCCTBXJgZhU2kKdV1yBENWag5mAGEHbFZgAjEKPlcMCRkAOAJqBHYBOwxuAWhTeFMvCj0Aeg_c_c&fi=146355948&pid=111-42-148-147&up=2&mp=0&co=0
+  或者
+  https://pan.baidu.com/s/1nJAFP2ieDoF4EEBG7JVeFw?pwd=3tui 
+  提取码:3tui
+
+  - 另一个运行库修复软件
+  https://zhangyue667.lanzouh.com/DirectXRepairEnhanced
+
   - python有一些包需要C++等依赖
   ```
   #例如安装ushuffle包报错
@@ -181,15 +249,6 @@ MD5:0B4B736177739F3DA75F0A3E53F24D08
   ERROR: Could not build wheels for ushuffle, which is required to install pyproject.toml-based projects
   ```
   根据提供的网址安装依赖：https://visualstudio.microsoft.com/zh-hans/visual-cpp-build-tools/
-  同理有一些软件需要安装__微软常用运行库合集__,用户可以自行搜索
+  同理有一些软件需要安装**微软常用运行库合集,**用户可以自行搜索
 
-  - DirectX_repair
-  重装电脑后可能会有一下dll文件确实，可以试试这个软件修复一下
-  https://s-83.lanzog.com/06062300146355948bb/2023/11/07/2e8b725991c6949ebdafc5275e5fe37e.7z?st=uvUdKC6G-dC98wad1iJVGQ&e=1717689335&b=U0UKYwByVjZTZVd1VV0FXgUCCTBXJgZhU2kKdV1yBENWag5mAGEHbFZgAjEKPlcMCRkAOAJqBHYBOwxuAWhTeFMvCj0Aeg_c_c&fi=146355948&pid=111-42-148-147&up=2&mp=0&co=0
-  或者
-  https://pan.baidu.com/s/1nJAFP2ieDoF4EEBG7JVeFw?pwd=3tui 
-  提取码:3tui
-
-  - 另一个运行库修复软件
-  https://zhangyue667.lanzouh.com/DirectXRepairEnhanced
 

@@ -11,8 +11,8 @@
   - 8.amd cpu的电脑可以把睡眠选项改一改（因为amd很容易盖盖子后睡死导致不得不重启）。（差点错怪鸡哥14x）
 - 桌面右键个性化-》主题-》桌面图标设置，挑出我的电脑图标。
   - 右键我的电脑-》磁盘管理，可以看到不同硬盘，可以自己分区或者扩容。（推荐重装的时候用DiskGenius分好磁盘再安装）
-  - 磁盘分区C盘200-300g左右
-  （有一些软件默认存储在C盘，例如conda创建的环境，并不是很好修改安装路径。例如conda下载包的缓存，hugging face下载的模型的缓存~win+R键再输入%temp%可以看到缓存文件，可以删除一些）。
+  - 磁盘分区建议**C盘200-300g左右**
+  （有一些软件默认存储在C盘，例如conda创建的环境，并不是很好修改安装路径。例如conda下载包的缓存，hugging face下载的模型的缓存。此外win+R键再输入%temp%可以看到缓存文件，可以删除一些）。
   **win10最开始一般占30-50g不等**，后期会是不是更新，变得臃肿。
   - 软件，数据集，浏览器，迅雷，idm等下载路径，按要求分盘和对应大小。
 
@@ -150,18 +150,28 @@ MD5:0B4B736177739F3DA75F0A3E53F24D08
   pip install torch==1.13.1+cpu torchvision==0.14.1+cpu torchaudio==0.13.1 --extra-index-url https://download.pytorch.org/whl/cpu
   pip install transformers datasets evaluate peft accelerate gradio optimum sentencepiece
   pip install jupyterlab scikit-learn pandas matplotlib tensorboard nltk rouge
+  
+  #我自己用的是激活环境后先第一步pip install transformers （创建环境是python是3.10 比较新）
+  #然后发现报错了，报错信息是有些包必须要torch才可以，此外pillow包单独安装 
+  #第二步根据报错信息安装额外的包，例如pillow
+  #第三步去torch官网上看cpu版本对应的torch下载指令 
+  #https://pytorch.org/get-started/previous-versions/ 注意python版本 是否用cuda
+  pip install torch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 --index-url https://download.pytorch.org/whl/cpu
+  #第四步再次安装transformers。pip install transformers
+  #第五步实际代码中发现pipeline()调用时提示numpy不可用，这时候把numpy降级到1.26.0就可以了（因为前面导入transformers库时告诉numpy 1.x 和 2.x不协调）
+  pip install numpy=1.26.0 
   ```
   - 如果第一步报错，始终下载不好，可以试试用requirement文件匹配着下载
   ```
   #conda下生成requirement （我直接给出来了）
   #conda list --export > D:\requirements.txt
   #记得激活你的环境  requirements的路径得是你的电脑下的路径
-  conda install --file requirements.txt
+  conda install --file requirements_conda.txt
 
   #原始的pip下的生成requirement （我直接给出来了）
   pip freeze > requirements.txt
   #记得激活你的环境  requirements的路径得是你的电脑下的路径 -i是指定源，防止你之前没设置
-  pip install -r requirements.txt -i https://pypi.douban.com/simple
+  pip install -r requirements_pip.txt -i https://pypi.douban.com/simple
   ```
   - 第二步修改hosts文件
   用everything软件搜索hosts文件，需要的是路径为C:\Windows\System32\drivers\etc的，在后面添加以下内容
